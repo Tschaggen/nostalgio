@@ -17,9 +17,10 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        [ServiceFilter(typeof(ClientIpCheckActionFilter))]
-        public async Task<ActionResult<List<Guid>>> GetFollowingIds (Guid userId)
+        //[ServiceFilter(typeof(ClientIpCheckActionFilter))]
+        public async Task<ActionResult<List<Guid>>> GetFollowingIds ([FromBody]Guid userId)
         {
+            Console.WriteLine(userId);
             try
             {
                 return Ok(await _userDbContext.Follows

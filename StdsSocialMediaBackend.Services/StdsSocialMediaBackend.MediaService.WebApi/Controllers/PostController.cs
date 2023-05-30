@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using StdsSocialMediaBackend.Domain.Model.Media;
 using StdsSocialMediaBackend.Domain.Model.User;
 using StdsSocialMediaBackend.Domain.Requests.Media;
 using StdsSocialMediaBackend.Infrastructure.Persistence;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mime;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
 {
@@ -24,25 +28,41 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<List<GetPostRes>>> GetTimeline()
         {
-            var tokenFromHeader = HttpContext.Request.Headers["Authorization"];
+            string? authHeader = Request.Headers["Authorization"];
+
+            if (authHeader == null || string.IsNullOrEmpty(authHeader) && !authHeader.StartsWith("Bearer "))
+            {
+                return BadRequest("Error inside Auth-Header");
+            }
+
             var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.ReadJwtToken(tokenFromHeader);
-            var claims = token.Claims;
+            var token = tokenHandler.ReadJwtToken(authHeader.Substring("Bearer ".Length));
             string? userId = token.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
 
             if(userId == null)
             {
                 return BadRequest("The given user from jwt not found");
             }
-            
-            var userRes = await _httpClient.GetAsync("");
-            var str = await userRes.Content.ReadAsStringAsync();
-            List<Guid>? following = JsonSerializer.Deserialize<List<Guid>>(str);
 
-            if(following == null)
+            string reqCont = JsonConvert.SerializeObject(userId);
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("http://localhost:5000/api/Follow/GetFollowingIds"),
+                Content = new StringContent(reqCont, Encoding.UTF8, MediaTypeNames.Application.Json /* or "application/json" in older versions */),
+            };
+
+            //var userRes = await _httpClient.GetAsync("http://localhost:5000/api/User/GetFollowingIds");
+            var userRes = await _httpClient.SendAsync(request);
+            var str = await userRes.Content.ReadAsStringAsync();
+            Console.WriteLine(str);
+            List<Guid>? following = System.Text.Json.JsonSerializer.Deserialize<List<Guid>>(str);
+
+            if(following == null || following.Count == 0)
             {
                 return BadRequest($"User {userId} follows nobody or an error occured");
             }

@@ -9,7 +9,7 @@ namespace StdsSocialMediaBackend.Domain.Requests.Media
         public DateTime PostetAt { get; set; }
         public Guid PostetByUserId { get; set; }
         public string PostetByUsername { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int Likes { get; set; }
         public List<Comment>? Comments { get; set; }
         public FileContentResult Image { get; set; }

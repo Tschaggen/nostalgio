@@ -33,7 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StdsSocialMediaBackend.Infr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{E14A906D-038E-4683-91D2-1E432F006D20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StdsSocialMediaBackend.AuthService.WebApi", "StdsSocialMediaBackend.Services\StdsSocialMediaBackend.AuthService.WebApi\StdsSocialMediaBackend.AuthService.WebApi.csproj", "{3C899379-2B51-4A1D-9DCB-31F92184D758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StdsSocialMediaBackend.AuthService.WebApi", "StdsSocialMediaBackend.Services\StdsSocialMediaBackend.AuthService.WebApi\StdsSocialMediaBackend.AuthService.WebApi.csproj", "{3C899379-2B51-4A1D-9DCB-31F92184D758}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StdsSocialMediaBackend.OcelotGateway", "StdsSocialMediaBackend.OcelotGateway\StdsSocialMediaBackend.OcelotGateway.csproj", "{D2E3950A-0AC1-441D-A317-0BA22D4A196E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StdsSocialMediaBackend.GatewayApp", "StdsSocialMediaBackend.GatewayApp\StdsSocialMediaBackend.GatewayApp.csproj", "{7DF00282-1666-415A-A196-6F00067D812C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,14 @@ Global
 		{3C899379-2B51-4A1D-9DCB-31F92184D758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C899379-2B51-4A1D-9DCB-31F92184D758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C899379-2B51-4A1D-9DCB-31F92184D758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E3950A-0AC1-441D-A317-0BA22D4A196E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E3950A-0AC1-441D-A317-0BA22D4A196E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E3950A-0AC1-441D-A317-0BA22D4A196E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E3950A-0AC1-441D-A317-0BA22D4A196E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DF00282-1666-415A-A196-6F00067D812C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DF00282-1666-415A-A196-6F00067D812C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DF00282-1666-415A-A196-6F00067D812C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DF00282-1666-415A-A196-6F00067D812C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +103,8 @@ Global
 		{24490008-5A66-4A58-85A5-E911EB139380} = {C7F9C7A9-54AB-45D2-A203-EA7DF804D18D}
 		{E14A906D-038E-4683-91D2-1E432F006D20} = {322AC924-1039-415E-BDDE-EFAE90436CEC}
 		{3C899379-2B51-4A1D-9DCB-31F92184D758} = {E14A906D-038E-4683-91D2-1E432F006D20}
+		{D2E3950A-0AC1-441D-A317-0BA22D4A196E} = {67E969E1-D2B3-414D-8CBE-41E504D29CDE}
+		{7DF00282-1666-415A-A196-6F00067D812C} = {67E969E1-D2B3-414D-8CBE-41E504D29CDE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4D0CD51-1C95-4859-A7ED-3202FB2E1A51}

@@ -1,0 +1,67 @@
+{
+  "Routes": [
+    //Login
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Auth/Login",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Auth/Login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    //Register
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Auth/Register",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Auth/Register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    //GetTimeline
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Post/GetTimeline",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Post/GetTimeline",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //GetFollowingIds
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Follow/GetFollowingIds",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Follow/GetFollowingIds",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}
