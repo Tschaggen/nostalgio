@@ -1,0 +1,20 @@
+.my-profile-button {
+    background-color: transparent;
+    border: none;
+}
+
+.my-profile-button:first-of-type {
+    margin-left: auto;
+}
+
+.hotbar {
+    display: flex;
+    padding: 1.5rem;
+    box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    text-align: center;
+}
