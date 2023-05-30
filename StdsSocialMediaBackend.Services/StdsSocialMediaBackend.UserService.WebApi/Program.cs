@@ -16,9 +16,11 @@ var app = builder.Build();
 
 AddUserData(app);
 
-app.UseCors(
-    //options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
-    );
+//app.UseCors(
+//    //options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+//    );
+
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 
