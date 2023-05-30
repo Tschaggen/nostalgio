@@ -36,15 +36,22 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
             
         }
 
-        [HttpGet("[action]")]
-        public async Task<ActionResult<bool>> IsFollower ([FromBody]Guid userId, [FromBody]Guid follwingId)
-        {
-            return Ok();
-        }
+        //[HttpGet("[action]")]
+        //public async Task<ActionResult<bool>> IsFollower ([FromBody]Guid userId, [FromBody]Guid follwingId)
+        //{
+        //    return Ok();
+        //}
 
         [HttpPost]
-        public async Task<ActionResult> Follow([FromBody]Guid followingId)
+        public async Task<ActionResult> Follow([FromBody]string followingUserName/*Guid followingId*/)
         {
+            User? followingUser = await _userDbContext.Users.Where(x => x.UserName == followingUserName).FirstOrDefaultAsync();
+
+            if(followingUser == null)
+            {
+                return NotFound("User not found");
+            }
+
             string? authHeader = Request.Headers["Authorization"];
 
             if (authHeader == null)
@@ -62,7 +69,7 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
             _userDbContext.Follows.Add(new Follow
             {
                 FollowerId = Guid.Parse(userId),
-                FollowingId = followingId
+                FollowingId = followingUser.Id
             });
             await _userDbContext.SaveChangesAsync();
             return Ok();
