@@ -13,27 +13,21 @@ class Timeline extends React.Component {
     }
 
     loadFeed() {
-        fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/GetTimeline')
+
+    
+        const options = {
+            method: 'GET',
+            headers: {
+                "Authorization": "Bearer "+this.props.jwtToken,  
+                "Content-Type": "application/json",
+            },
+        };
+
+        fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/GetTimeline',options)
         .then((res) => {
             return res.json();
         }).then( res => {
-            this.setState({feed : [
-                {
-                    postId : 'sauifhagsuifhaiosf',
-                    postedAt: '2023-05-25T17:48:21.2124',
-                    postedByUsername : 'Cock' ,
-                    description : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' ,
-                    likes : 15,
-                    comments : [{
-                        username : 'Schwnaz',
-                        created : '2023-06-25T17:48:21.2124',
-                        text : 'Obama ist cool'
-                    }
-                    ],
-                    image : 'adfsafsaf'
-
-                }
-            ]});
+            this.setState({feed : res});
         });
     }
 

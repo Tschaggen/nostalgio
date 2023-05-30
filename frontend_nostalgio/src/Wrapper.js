@@ -30,13 +30,13 @@ class Wrapper extends React.Component {
         }
         else {
             if(this.state.screen === 'timeline') {
-                return <Timeline setScreen={this.setScreen}/>;
+                return <Timeline setScreen={this.setScreen} jwtToken={this.state.login}/>;
             }
             else if(this.state.screen === 'myprofile') {
-                return <MyProfile setScreen={this.setScreen}/>;
+                return <MyProfile setScreen={this.setScreen} jwtToken={this.state.login}/>;
             }
             else if(this.state.screen === 'otherprofile') {
-                return <OtherProfile setScreen={this.setScreen}/>;
+                return <OtherProfile setScreen={this.setScreen} jwtToken={this.state.login}/>;
             }
         }
     }

@@ -13,11 +13,18 @@ class Post extends React.Component {
         comments.push(<Comment text={e.text} created={e.created} username={e.username}></Comment>)
       });
 
+      var image = new Image();
+      image.src = 'data:'+this.props.image.contentType+';base64,'+this.props.image.fileContents;
+
       return( 
         <div className='post' id={'post-'+this.props.id}>
 
             <div className='post-user-wrapper'>
               <div className='post-user'>{this.props.username}</div>
+            </div>
+
+            <div className='post-image-wrapper'>
+              <img className='post-image' src={'data:'+this.props.image.contentType+';base64,'+this.props.image.fileContents}></img>
             </div>
 
             <div className='post-text'>{this.props.text}</div>

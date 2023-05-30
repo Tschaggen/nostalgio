@@ -6,8 +6,8 @@ class Login extends React.Component {
     login(username,password) {
 
       const params = {
-        username : username,
-        password : password
+        Username : username,
+        Password : password
       }
 
       const options = {
@@ -18,14 +18,25 @@ class Login extends React.Component {
         body: JSON.stringify( params ) 
       }
 
-      console.log(options);
-
       fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Auth/Login', options)
         .then((res) => {
+          if(res.status == 401 || res.status == 404 || res.status == 400 || res.status == 500) {
+            return false;
+          }
             return res.json();
         }).then( res => {
-          console.log(res);
+          if(res !== false) {
             this.props.setLogin(res.jwtToken);
+          }
+          else {
+            let container = document.querySelector('.login-container');
+
+            let element = document.createElement('div');
+            element.innerText = 'Something went wrong during the login procces';
+            element.classList.add('error')
+
+            container.prepend(element);
+          }
         });
     }
 
