@@ -15,7 +15,7 @@ class Timeline extends React.Component {
     loadFeed() {
         fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/GetTimeline')
         .then((res) => {
-            return res.json;
+            return res.json();
         }).then( res => {
             this.setState({feed : [
                 {
