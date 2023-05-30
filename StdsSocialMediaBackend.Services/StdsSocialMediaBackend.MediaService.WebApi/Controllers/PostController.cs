@@ -155,10 +155,26 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         public async Task<ActionResult> CommentPost([FromBody] CommentReq req)
         {
             try
-            { 
-                _postDbContext.Comments.Add(new Comment
+            {
+                //_postDbContext.Comments.Add(new Comment
+                //{
+                //    PostId = req.PostId,
+                //    UserId = req.UserId,
+                //    Text = req.Text,
+                //    Created = DateTime.Now
+                //});
+
+                var post = await _postDbContext.Posts.Where(x => x.Id == req.PostId).FirstOrDefaultAsync();
+                if (post == null)
                 {
-                    PostId = req.PostId,
+                    return BadRequest("Post not found");
+                }
+                if (post.Comments == null)
+                {
+                    post.Comments = new();
+                }
+                post.Comments.Add(new Comment
+                {
                     UserId = req.UserId,
                     Text = req.Text,
                     Created = DateTime.Now
