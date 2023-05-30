@@ -1,0 +1,52 @@
+{
+  "Routes": [
+    //Login
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Auth/Login",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Auth/Login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    //Register
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Auth/Register",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Auth/Register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User/GetAll",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/User/GetAll",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}

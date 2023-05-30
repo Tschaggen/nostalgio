@@ -19,7 +19,7 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(ClientIpCheckActionFilter))]
-        public async Task<ActionResult> RegistereUser(User user)
+        public async Task<ActionResult<Guid>> AddUser(User user)
         {
             try
             {
@@ -30,11 +30,11 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-            return Ok();
+            return Ok(user.Id);
         }
 
-        [HttpGet("[action]")]
-        //[Authorize(Roles = "Administrator")]
+        //[HttpGet("[action]")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<User>>> GetAll()
         {
             try
