@@ -18,7 +18,7 @@ var app = builder.Build();
 await app.UseOcelot();
 
 app.UseCors(
-    options => options.AllowAnyOrigin.AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+    options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
     );
 
 
