@@ -34,7 +34,12 @@ namespace StdsSocialMediaBackend.Infrastructure
                 };
             });
 
-            services.AddCors();
+            services.AddCors(o => o.AddPolicy("myCors", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddLogging();
             services.AddHttpClient();

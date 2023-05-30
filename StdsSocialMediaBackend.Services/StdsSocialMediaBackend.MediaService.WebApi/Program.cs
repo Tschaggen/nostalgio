@@ -11,7 +11,7 @@ builder.Services.RegisterMediaApiServices(builder.Configuration);
 var app = builder.Build();
 
 app.UseCors(
-    options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+    //options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
     );
 
 // Configure the HTTP request pipeline.
