@@ -47,7 +47,7 @@
         "AllowedScopes": []
       }
     },
-    //Follow
+    //Comment
     {
       "DownstreamHostAndPorts": [
         {
@@ -65,7 +65,25 @@
         "AllowedScopes": []
       }
     },
-    //Comment
+    //Like
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Post/LikePost",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Post/LikePost",
+      "UpstreamHttpMethod": [ "Options", "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Follow
     {
       "DownstreamHostAndPorts": [
         {
