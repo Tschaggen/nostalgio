@@ -36,7 +36,7 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<AuthRes?>> Authenticate([FromBody] AuthReq authReq)
+        public async Task<ActionResult<AuthRes?>> Authenticate([FromForm] AuthReq authReq)
         {
             if (string.IsNullOrWhiteSpace(authReq.Username) || string.IsNullOrWhiteSpace(authReq.Password))
             {
