@@ -26,7 +26,7 @@
       "DownstreamPathTemplate": "/api/Auth/Register",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Auth/Register",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Options", "Post" ],
       "RouteIsCaseSensitive": false
     },
     //GetTimeline
@@ -40,7 +40,7 @@
       "DownstreamPathTemplate": "/api/Post/GetTimeline",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Post/GetTimeline",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [ "Options", "Get" ],
       "RouteIsCaseSensitive": false,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -58,7 +58,7 @@
       "DownstreamPathTemplate": "/api/Follow",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Follow",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Options", "Post" ],
       "RouteIsCaseSensitive": false,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -127,6 +127,9 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
       }
     },
     //Get Users in UserService
@@ -145,6 +148,9 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
       }
     }
   ],

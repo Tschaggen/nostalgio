@@ -119,19 +119,22 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
+        [Authorize]
         public ActionResult<GetPostRes> GetPost([FromBody] Guid postId)
         {
             //prüfe, dass User auch follower über jwt
             return Ok();
         }
         [HttpPost("[action]")]
+        [Authorize]
         public ActionResult<GetPostRes> AddPost([FromBody] AddPostReq post)
         {
             //user-id aus jwt beziehen nicht aus body
-            return Ok();
+            throw new NotImplementedException();
         }
 
         [HttpPost("[action]")]
+        [Authorize]
         public async Task<ActionResult> LikePost([FromBody] LikeReq req)
         {
             try
@@ -152,6 +155,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         }
 
         [HttpPost("[action]")]
+        [Authorize]
         public async Task<ActionResult> CommentPost([FromBody] CommentReq req)
         {
             try

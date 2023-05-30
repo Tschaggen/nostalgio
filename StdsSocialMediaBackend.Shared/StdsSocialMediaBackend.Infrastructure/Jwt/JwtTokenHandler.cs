@@ -11,7 +11,7 @@ namespace StdsSocialMediaBackend.Infrastructure.Jwt
     public class JwtTokenHandler
     {
         //ToDo: über options...
-        public const string JWT_SECURITY_KEY = "ChuckStinktChuckStinktChuckStinktChuckStinkt";
+        public const string JWT_SECURITY_KEY = "TestTestTestTestTestTestTestTest";
         private const int JWT_TOKEN_VALIDIY_MINS = 60;
         private readonly List<AuthUser> _testUser;
 

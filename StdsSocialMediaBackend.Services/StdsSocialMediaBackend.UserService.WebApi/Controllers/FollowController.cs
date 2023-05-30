@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StdsSocialMediaBackend.Domain.Helper;
@@ -43,6 +44,7 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
         //}
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Follow([FromBody]string followingUserName/*Guid followingId*/)
         {
             User? followingUser = await _userDbContext.Users.Where(x => x.UserName == followingUserName).FirstOrDefaultAsync();
