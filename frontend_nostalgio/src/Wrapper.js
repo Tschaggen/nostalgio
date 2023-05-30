@@ -3,6 +3,7 @@ import Login from "./Login";
 import Timeline from "./Timeline";
 import MyProfile from './MyProfile';
 import OtherProfile from './OtherProfile';
+import './index.css'
 
 class Wrapper extends React.Component {
     constructor(props) {

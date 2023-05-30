@@ -1,13 +1,41 @@
+:root {
+  --primary : rgba(240, 46, 170, 1.0);
+  --radius : 5px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  min-height: 100vh;
+  width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.none {
+  display: none !important;
+}
+
+.submit {
+  margin-left: auto;
+  font-size: 1rem;
+  background-color: var(--primary);
+  border: none;
+  padding: .4rem;
+  border-radius: var(--radius);
 }

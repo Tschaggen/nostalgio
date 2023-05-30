@@ -1,0 +1,60 @@
+.post-user {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.post-user-wrapper {
+    margin-bottom: 1rem;
+}
+
+.post {
+    padding: 1.5rem;
+    -webkit-box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 17px 0px rgba(0,0,0,0.75);
+}
+
+.post-interaction-wrapper {
+    display: flex;
+    justify-content: end;
+    margin-top: 1.5rem;
+}
+
+.post-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.post-btn svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+.post-like-btn {
+    fill: var(--primary);
+}
+
+.post-interaction-wrapper form {
+    width: 100%;
+    display: flex;
+    padding-right: 1.5rem;
+    gap: 2rem;
+}
+
+.post-interaction-wrapper .submit {
+    padding: .4rem 3rem;
+}
+
+.from-write {
+    width:100%;
+}
+
+.comment-wrapper {
+    padding-left: 2rem;
+    padding-top: 1rem;
+}
+
+.comment-user {
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}
