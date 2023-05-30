@@ -15,6 +15,10 @@ var app = builder.Build();
 
 AddUserData(app);
 
+app.UseCors(
+    options => options.WithOrigins("http://localhost").AllowAnyMethod()
+    );
+
 // Configure the HTTP request pipeline.
 
 app.UseAuthorization();

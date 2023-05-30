@@ -34,6 +34,8 @@ namespace StdsSocialMediaBackend.Infrastructure
                 };
             });
 
+            services.AddCors();
+
             services.AddLogging();
             services.AddHttpClient();
             services.AddScoped<ClientIpCheckActionFilter>(container =>
