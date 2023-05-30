@@ -10,6 +10,10 @@ builder.Services.RegisterMediaApiServices(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseCors(
+    options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+    );
+
 // Configure the HTTP request pipeline.
 
 app.UseAuthorization();
