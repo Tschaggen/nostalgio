@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StdsSocialMediaBackend.Domain.Helper;
+using StdsSocialMediaBackend.Domain.Model.User;
 using StdsSocialMediaBackend.Infrastructure.Persistence;
 
 namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
@@ -36,8 +37,34 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<ActionResult<bool>> IsFollower (Guid userId, Guid follwingId)
+        public async Task<ActionResult<bool>> IsFollower ([FromBody]Guid userId, [FromBody]Guid follwingId)
         {
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Follow([FromBody]Guid followingId)
+        {
+            string? authHeader = Request.Headers["Authorization"];
+
+            if (authHeader == null)
+            {
+                return BadRequest("Error inside Auth-Header");
+            }
+
+            string? userId = UserFromAuthHeader.GetUserId(authHeader);
+
+            if (userId == null)
+            {
+                return BadRequest("Error inside Auth-Header or user not found");
+            }
+
+            _userDbContext.Follows.Add(new Follow
+            {
+                FollowerId = Guid.Parse(userId),
+                FollowingId = followingId
+            });
+            await _userDbContext.SaveChangesAsync();
             return Ok();
         }
     }

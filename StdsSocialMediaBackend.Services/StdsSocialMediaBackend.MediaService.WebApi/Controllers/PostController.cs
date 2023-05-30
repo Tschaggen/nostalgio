@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using StdsSocialMediaBackend.Domain.Helper;
 using StdsSocialMediaBackend.Domain.Model.Media;
 using StdsSocialMediaBackend.Domain.Model.User;
 using StdsSocialMediaBackend.Domain.Requests.Media;
@@ -33,19 +34,20 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         {
             string? authHeader = Request.Headers["Authorization"];
 
-            if (authHeader == null || string.IsNullOrEmpty(authHeader) && !authHeader.StartsWith("Bearer "))
+            if (authHeader == null )
             {
                 return BadRequest("Error inside Auth-Header");
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.ReadJwtToken(authHeader.Substring("Bearer ".Length));
-            string? userId = token.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+            string? userId = UserFromAuthHeader.GetUserId(authHeader);
 
-            if(userId == null)
+            if (userId == null)
             {
-                return BadRequest("The given user from jwt not found");
+                return BadRequest("Error inside Auth-Header or user not found");
             }
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var token = tokenHandler.ReadJwtToken(authHeader.Substring("Bearer ".Length));
+            //string? userId = token.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
 
             string reqCont = JsonConvert.SerializeObject(userId);
 
@@ -59,7 +61,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             //var userRes = await _httpClient.GetAsync("http://localhost:5000/api/User/GetFollowingIds");
             var userRes = await _httpClient.SendAsync(request);
             var str = await userRes.Content.ReadAsStringAsync();
-            Console.WriteLine(str);
+            //Console.WriteLine(str);
             List<Guid>? following = System.Text.Json.JsonSerializer.Deserialize<List<Guid>>(str);
 
             if(following == null || following.Count == 0)

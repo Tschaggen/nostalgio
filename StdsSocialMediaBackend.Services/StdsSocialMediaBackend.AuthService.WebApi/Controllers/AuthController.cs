@@ -69,6 +69,8 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register(RegisterReq req)
         {
+            Guid userId= new();
+
             if (string.IsNullOrWhiteSpace(req.User.UserName) || string.IsNullOrWhiteSpace(req.Password))
             {
                 _logger.LogWarning($"Registration failed at {DateTime.Now}: name or paswword empty");
@@ -82,7 +84,15 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
                         Encoding.UTF8,
                         "application/json"
                 );
-                var res = await _httpClient.PostAsync("http://localhost/api/Users", userJson);
+                var res = await _httpClient.PostAsync("http://localhost:5000/api/User", userJson);
+
+                if(!res.IsSuccessStatusCode) 
+                {
+                    return StatusCode(500, res.ReasonPhrase);
+                }
+
+                var str = await res.Content.ReadAsStringAsync();
+                userId = JsonSerializer.Deserialize<Guid>(str);
             }
             catch (Exception ex)
             {
@@ -96,6 +106,7 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
             {
                 _authDbContext.Users.Add(new AuthUser
                 {
+                    Id = userId,
                     Username = req.User.UserName,
                     Password = PasswordHelper.HashPw(req.Password),
                     Role = Role.User
@@ -117,7 +128,7 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
         //[ServiceFilter(typeof(ClientIpCheckActionFilter))]
         public async Task<ActionResult<List<string>>?> GetUsers()
         {
-            var users = await _authDbContext.Users.Select(x => x.Username).ToListAsync();
+            var users = await _authDbContext.Users.ToListAsync();
             if (users == null)
             {
                 return NotFound();

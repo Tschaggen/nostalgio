@@ -1,5 +1,6 @@
 {
   "Routes": [
+    //Public Endpoints
     //Login
     {
       "DownstreamHostAndPorts": [
@@ -46,6 +47,26 @@
         "AllowedScopes": []
       }
     },
+    //Follow
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Follow",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Follow",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+
+    //Internal Endpoints
     //GetFollowingIds
     {
       "DownstreamHostAndPorts": [
@@ -59,6 +80,72 @@
       "UpstreamPathTemplate": "/api/Follow/GetFollowingIds",
       "UpstreamHttpMethod": [ "Get" ],
       "RouteIsCaseSensitive": false
+    },
+    //IsFollower
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Follow/IsFollower",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Follow/IsFollower",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false
+    },
+    //Add Users in UserService 
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/User",
+      "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+
+    //Admin Endpoints
+    //Get Users in AuthService
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Auth/GetUsers",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Auth/GetUsers",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Get Users in UserService
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/User",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
   ],
   "GlobalConfiguration": {
