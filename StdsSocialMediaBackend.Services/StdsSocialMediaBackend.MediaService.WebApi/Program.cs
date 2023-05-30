@@ -60,11 +60,11 @@ static void AddPostData(WebApplication app)
         Username = "Admin",
         UserId = Guid.Parse("f7007270-fb3a-11ed-929d-7d2144380188")
     });
-    p1.Likes.Add(new Like
-    {
-        Id = Guid.NewGuid(),
-        UserId = Guid.Parse("f7007270-fb3a-11ed-929d-7d2144380188")
-    });
+    //p1.Likes.Add(new Like
+    //{
+    //    Id = Guid.NewGuid(),
+    //    UserId = Guid.Parse("f7007270-fb3a-11ed-929d-7d2144380188")
+    //});
 
     db.Posts.Add(p1);
     db.SaveChanges();

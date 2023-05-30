@@ -71,7 +71,14 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             }
 
             var res = new List<GetPostRes>();
-            var postsDb = await _postDbContext.Posts.Where(x => following.Contains(x.UserId)).OrderBy(x => x.PostedAt).Take(10).ToListAsync();
+            var postsDb = await _postDbContext
+                                    .Posts
+                                    .Where(x => following.Contains(x.UserId))
+                                    .OrderBy(x => x.PostedAt)
+                                    .Take(10)
+                                    .Include(x => x.Likes)
+                                    .Include(x => x.Comments)
+                                    .ToListAsync();
 
             Byte[] b = System.IO.File.ReadAllBytes($"C:\\StdsTest\\Test.jpg");
 
@@ -138,7 +145,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         [Authorize]
         public async Task<ActionResult> LikePost([FromBody] Guid postId)
         {
-
+            // ToDO: prüfe if Follower...
             try
             {
                 string? authHeader = Request.Headers["Authorization"];
@@ -154,6 +161,11 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
                 if (userId == null || userName == null)
                 {
                     return BadRequest("Error inside Auth-Header or user not found");
+                }
+
+                if(await _postDbContext.Likes.Where(x => x.PostId == postId && x.UserId == Guid.Parse(userId)).AnyAsync())
+                {
+                    return BadRequest("Like Bereits vorhanden");
                 }
 
                 _postDbContext.Likes.Add(new Like
