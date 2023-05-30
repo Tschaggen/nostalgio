@@ -38,7 +38,7 @@ namespace StdsSocialMediaBackend.Infrastructure
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                builder => builder.WithOrigins("http://192.168.1.101:8888")
+                builder => builder.WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
