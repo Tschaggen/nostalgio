@@ -41,7 +41,8 @@ namespace StdsSocialMediaBackend.Infrastructure
                 builder => builder
                        .AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader());
+                       .AllowAnyHeader()
+                       .AllowCredentials());
             });
 
             services.AddLogging();

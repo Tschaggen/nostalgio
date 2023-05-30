@@ -12,7 +12,7 @@
       "DownstreamPathTemplate": "/api/Auth/Login",
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/Auth/Login",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Options", "Post" ],
       "RouteIsCaseSensitive": false
     },
     //Register
