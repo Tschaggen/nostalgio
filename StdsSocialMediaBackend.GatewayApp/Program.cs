@@ -17,9 +17,11 @@ var app = builder.Build();
 
 await app.UseOcelot();
 
-app.UseCors(
-    //options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
-    );
+//app.UseCors(
+//    //options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+//    );
+
+app.UseCors("CorsPolicy");
 
 
 app.UseAuthentication();
