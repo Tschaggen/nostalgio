@@ -8,7 +8,7 @@ namespace StdsSocialMediaBackend.Domain.Requests.Media
 {
     public class CommentReq
     {
-        public Guid UserId { get; set; }
+        //public Guid UserId { get; set; }
         public Guid PostId { get; set; }
         public string Text { get; set; }
     }

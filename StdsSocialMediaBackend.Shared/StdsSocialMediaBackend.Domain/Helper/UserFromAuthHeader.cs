@@ -11,15 +11,32 @@ namespace StdsSocialMediaBackend.Domain.Helper
     {
         static public string? GetUserId(string authHeader)
         {
+            var token = GetToken(authHeader);
+            return token.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+        }
 
+        static public string? GetUserName(string authHeader)
+        {
+            var token = GetToken(authHeader);
+            return token.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+        }
+
+        private static JwtSecurityToken GetToken(string authHeader)
+        {
             if (string.IsNullOrEmpty(authHeader) && !authHeader.StartsWith("Bearer "))
             {
-                return null;
+                throw new Exception();
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.ReadJwtToken(authHeader.Substring("Bearer ".Length));
-            return token.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+
+            if (token == null)
+            {
+                throw new ArgumentNullException(nameof(token));
+            }
+
+            return token;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using StdsSocialMediaBackend.Domain.Helper;
 using StdsSocialMediaBackend.Domain.Model.Media;
@@ -100,20 +101,20 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             }
 
             //Test
-            foreach (var i in Enumerable.Range(0, 9))
-            {
-                res.Add(new GetPostRes
-                {
-                    PostId = Guid.NewGuid(),
-                    PostetAt = DateTime.Now,
-                    PostetByUserId = Guid.NewGuid(),
-                    PostetByUsername = "Test",
-                    Description = "Test",
-                    Likes = 1,
-                    Comments = new(),
-                    Image = File(b, "image/jpg", "post.jpg")
-                });
-            }
+            //foreach (var i in Enumerable.Range(0, 9))
+            //{
+            //    res.Add(new GetPostRes
+            //    {
+            //        PostId = Guid.NewGuid(),
+            //        PostetAt = DateTime.Now,
+            //        PostetByUserId = Guid.NewGuid(),
+            //        PostetByUsername = "Test",
+            //        Description = "Test",
+            //        Likes = 1,
+            //        Comments = new(),
+            //        Image = File(b, "image/jpg", "post.jpg")
+            //    });
+            //}
             
             return Ok(res);
         }
@@ -135,14 +136,30 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
 
         [HttpPost("[action]")]
         [Authorize]
-        public async Task<ActionResult> LikePost([FromBody] LikeReq req)
+        public async Task<ActionResult> LikePost([FromBody] Guid postId)
         {
+
             try
             {
+                string? authHeader = Request.Headers["Authorization"];
+
+                if (authHeader == null)
+                {
+                    return BadRequest("Error inside Auth-Header");
+                }
+
+                string? userId = UserFromAuthHeader.GetUserId(authHeader);
+                string? userName = UserFromAuthHeader.GetUserName(authHeader);
+
+                if (userId == null || userName == null)
+                {
+                    return BadRequest("Error inside Auth-Header or user not found");
+                }
+
                 _postDbContext.Likes.Add(new Like
                 {
-                    PostId = req.PostId,
-                    UserId = req.UserId
+                    PostId = postId,
+                    UserId = Guid.Parse(userId)
                 });
                 await _postDbContext.SaveChangesAsync();
             }
@@ -167,8 +184,25 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
                 //    Text = req.Text,
                 //    Created = DateTime.Now
                 //});
+                string? authHeader = Request.Headers["Authorization"];
 
-                var post = await _postDbContext.Posts.Where(x => x.Id == req.PostId).FirstOrDefaultAsync();
+                if (authHeader == null)
+                {
+                    return BadRequest("Error inside Auth-Header");
+                }
+
+                string? userId = UserFromAuthHeader.GetUserId(authHeader);
+                string? userName  = UserFromAuthHeader.GetUserName(authHeader);
+
+                if (userId == null || userName == null)
+                {
+                    return BadRequest("Error inside Auth-Header or user not found");
+                }
+
+                var postTask = _postDbContext.Posts.Where(x => x.Id == req.PostId).FirstOrDefaultAsync();
+                //var userTask = _httpClient.GetAsync($"http://localhost/api/users/{userId}");
+
+                var post = await postTask;
                 if (post == null)
                 {
                     return BadRequest("Post not found");
@@ -177,9 +211,26 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
                 {
                     post.Comments = new();
                 }
+
+                if(req.Text == null || req.Text.IsNullOrEmpty())
+                {
+                    return BadRequest("Kein Text übergeben");
+                }
+
+                //var userRes = await userTask;
+                //var str = await userRes.Content.ReadAsStringAsync();
+                ////Console.WriteLine(str);
+                //User? user = System.Text.Json.JsonSerializer.Deserialize<User>(str);
+
+                //if(user == null)
+                //{
+                //    return BadRequest("User not found");
+                //}
+
                 post.Comments.Add(new Comment
                 {
-                    UserId = req.UserId,
+                    UserId = Guid.Parse(userId),
+                    Username = userName,
                     Text = req.Text,
                     Created = DateTime.Now
                 });

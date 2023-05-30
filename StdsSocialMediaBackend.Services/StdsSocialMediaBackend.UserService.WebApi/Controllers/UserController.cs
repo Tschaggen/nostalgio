@@ -33,13 +33,33 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
             return Ok(user.Id);
         }
 
-        //[HttpGet("[action]")]
+        [HttpGet()]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<User>>> GetAll()
         {
             try
             {
                 return await _userDbContext.Users.Include(x => x.Adress).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> Get([FromBody]Guid userId)
+        {
+            try
+            {
+                var user = await _userDbContext.Users.Where(x => x.Id == userId).Include(x => x.Adress).FirstOrDefaultAsync();
+
+                if (user == null)
+                {
+                    return BadRequest("User not found");
+                }
+
+                return Ok(user);
             }
             catch (Exception ex)
             {
