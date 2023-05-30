@@ -52,6 +52,24 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Post/CommentPost",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Post/CommentPost",
+      "UpstreamHttpMethod": [ "Options", "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Comment
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
           "Port": 5003
         }
       ],

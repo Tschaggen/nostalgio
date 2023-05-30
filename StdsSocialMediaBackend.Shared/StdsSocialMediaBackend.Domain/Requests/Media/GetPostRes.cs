@@ -12,6 +12,6 @@ namespace StdsSocialMediaBackend.Domain.Requests.Media
         public string? Description { get; set; }
         public int Likes { get; set; }
         public List<Comment>? Comments { get; set; }
-        public FileContentResult Image { get; set; }
+        public FileContentResult? Image { get; set; }
     }
 }
