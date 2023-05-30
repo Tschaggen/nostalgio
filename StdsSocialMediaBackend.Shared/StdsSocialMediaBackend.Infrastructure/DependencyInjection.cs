@@ -38,10 +38,10 @@ namespace StdsSocialMediaBackend.Infrastructure
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                builder => builder.WithOrigins("http://localhost:3000")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+                builder => builder
+                       .AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
             });
 
             services.AddLogging();
