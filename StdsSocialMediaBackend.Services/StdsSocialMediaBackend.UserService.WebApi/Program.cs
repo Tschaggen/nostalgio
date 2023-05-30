@@ -17,7 +17,7 @@ var app = builder.Build();
 AddUserData(app);
 
 app.UseCors(
-    options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
+    options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod()
     );
 
 // Configure the HTTP request pipeline.
