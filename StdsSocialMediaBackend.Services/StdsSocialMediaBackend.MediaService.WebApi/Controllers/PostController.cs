@@ -8,6 +8,7 @@ using StdsSocialMediaBackend.Domain.Model.Media;
 using StdsSocialMediaBackend.Domain.Model.User;
 using StdsSocialMediaBackend.Domain.Requests.Media;
 using StdsSocialMediaBackend.Infrastructure.Persistence;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mime;
 using System.Text;
@@ -67,7 +68,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
 
             if(following == null || following.Count == 0)
             {
-                return BadRequest($"User {userId} follows nobody or an error occured");
+                return new List<GetPostRes> ();
             }
 
             var res = new List<GetPostRes>();
