@@ -88,7 +88,10 @@ class Timeline extends React.Component {
                             body: JSON.stringify( params ) 
                         }
           
-                        fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/Post', options);
+                        fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post', options);
+
+                        this.props.reloadFeed();
+                        this.props.reloadFeed();
 
                     };
 
