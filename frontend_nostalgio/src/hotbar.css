@@ -1,6 +1,9 @@
 .timeline-button {
     background-color: transparent;
     border: none;
+}
+
+.timeline-button:first-of-type {
     margin-left: auto;
 }
 
