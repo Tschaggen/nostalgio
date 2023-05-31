@@ -73,8 +73,8 @@ namespace StdsSocialMediaBackend.AuthService.WebApi.Controllers
 
             if (string.IsNullOrWhiteSpace(req.User.UserName) || string.IsNullOrWhiteSpace(req.Password))
             {
-                _logger.LogWarning($"Registration failed at {DateTime.Now}: name or paswword empty");
-                return BadRequest();
+                _logger.LogWarning($"Registration failed at {DateTime.Now}: name or password empty");
+                return BadRequest("Username oder Passwort leer");
             }
 
             try
