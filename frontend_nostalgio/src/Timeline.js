@@ -63,6 +63,43 @@ class Timeline extends React.Component {
         return( 
         <div className='timeline-wrapper' id='timeline-wrapper'>
             <Hotbar setScreen={this.props.setScreen} jwtToken={this.props.jwtToken} reloadFeed={this.loadFeed}/>
+            <div id='postForm' className='none'>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+
+                    var reader = new FileReader();
+                    var token = this.props.jwtToken;
+                    reader.readAsDataURL(e.target.elements.img.files[0]);
+                    reader.onload = function () {
+                        let img = reader.result;
+                        let text = e.target.elements.text.value;
+
+                        const params = {
+                            description : text,
+                            image: img
+                        }
+          
+                        const options = {
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer "+token,
+                                "Content-Type": "application/json"  
+                            },
+                            body: JSON.stringify( params ) 
+                        }
+          
+                        fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/Post', options);
+
+                    };
+
+                }}>
+                    <textarea type='text' name='text' className='make-post-text'></textarea>
+                    <div className='wrapper'>
+                        <input type='file' name='img'></input>
+                        <button className='submit'>post</button>
+                    </div>
+                </form>
+            </div>
             <div className='post-wrapper'>
                 {posts}
             </div>
