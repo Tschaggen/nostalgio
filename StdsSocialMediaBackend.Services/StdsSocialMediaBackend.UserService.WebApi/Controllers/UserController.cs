@@ -27,6 +27,7 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
 
         [HttpPost]
         [ServiceFilter(typeof(ClientIpCheckActionFilter))]
+        //Internal für AuthService
         public async Task<ActionResult<Guid>> AddUser(User user)
         {
             try

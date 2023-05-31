@@ -73,7 +73,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             var res = new List<GetPostRes>();
             var postsDb = await _postDbContext
                                     .Posts
-                                    .Where(x => following.Contains(x.UserId))
+                                    .Where(x => following.Contains(x.UserId) || x.UserId == Guid.Parse(userId))
                                     .OrderBy(x => x.PostedAt)
                                     .Take(10)
                                     .Include(x => x.Likes)
@@ -151,6 +151,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             return Ok(posts);
         }
 
+        //verifiziere dass Img auch ein Bild ist
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<GetPostRes>> AddPost([FromBody] AddPostReq post)
