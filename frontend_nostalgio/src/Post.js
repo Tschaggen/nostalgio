@@ -41,6 +41,24 @@ class Post extends React.Component {
               onSubmit={(e) => {
                 e.preventDefault();
 
+                let text = e.target.elements.comment.value;
+
+                const params = {
+                  text : text,
+                  postId : this.props.id
+                }
+
+                const options = {
+                  method: 'POST',
+                  headers: {
+                      "Authorization": "Bearer "+this.props.jwtToken,
+                      "Content-Type": "application/json"  
+                  },
+                  body: JSON.stringify( params ) 
+                }
+
+                fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post/CommentPost', options);
+
                 this.props.reloadFeed();
                 this.props.reloadFeed();
               }}>
