@@ -62,7 +62,7 @@ class Timeline extends React.Component {
 
         return( 
         <div className='timeline-wrapper' id='timeline-wrapper'>
-            <Hotbar setScreen={this.props.setScreen} />
+            <Hotbar setScreen={this.props.setScreen} jwtToken={this.props.jwtToken}/>
             <div className='post-wrapper'>
                 {posts}
             </div>

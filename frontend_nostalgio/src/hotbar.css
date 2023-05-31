@@ -1,9 +1,6 @@
-.my-profile-button {
+.timeline-button {
     background-color: transparent;
     border: none;
-}
-
-.my-profile-button:first-of-type {
     margin-left: auto;
 }
 
@@ -17,4 +14,20 @@
     font-family: 'Pacifico', cursive;
     font-size: 2rem;
     text-align: center;
+}
+
+.hotbar-add-form {
+    margin-left: auto;
+}
+
+.hotbar-add-text {
+
+    height: 1.5rem;
+    margin-right: 2rem;
+    width: 250px;
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+    border-radius: var(--radius);
+    border: none;
+    outline: none !important;
+
 }
