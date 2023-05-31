@@ -51,7 +51,8 @@ static void AddPostData(WebApplication app)
         PostedAt = DateTime.Now,
         Username = "TestUser",
         Comments = new(),
-        Likes = new()
+        Likes = new(),
+        OriginalImage = Guid.Parse("3a0fabfb-0ab7-4175-bd9e-727c68504582")
     };
     p1.Comments.Add(new Comment
     {
@@ -68,7 +69,8 @@ static void AddPostData(WebApplication app)
         PostedAt = DateTime.Now,
         Username = "Admin",
         Comments = new(),
-        Likes = new()
+        Likes = new(),
+        OriginalImage = Guid.Parse("230e36fb-8a4d-4761-8284-ce652e963c9b")
     };
     //p1.Likes.Add(new Like
     //{

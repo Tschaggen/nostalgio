@@ -80,12 +80,12 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
                                     .Include(x => x.Comments)
                                     .ToListAsync();
 
-            Byte[] b = System.IO.File.ReadAllBytes($"C:\\StdsTest\\Test.jpg");
 
             foreach (var postDb in postsDb)
             {
                 //Byte[] b = System.IO.File.ReadAllBytes($"C:\\StdsTest\\Test.jpg");
-                var img = File(b, "image/jpg", "post.jpg");
+                Byte[] b = System.IO.File.ReadAllBytes($"C:\\StdsTest\\{postDb.OriginalImage}.jpg");
+                //var img = File(b, "image/jpg", "post.jpg");
                 int likes = 0;
                 if (postDb.Likes != null)
                 {
@@ -177,8 +177,13 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
 
                 var imgGuid = Guid.NewGuid();
 
-                if (post.Image != null) { 
-                    System.IO.File.WriteAllBytes($"C:\\StdsTest\\{imgGuid.ToString()}.jpg", Convert.FromBase64String(post.Image));
+                if (post.Image != null) {
+                    string base64Image = post.Image.Replace("data:image/jpeg;base64,", string.Empty);
+
+                    // Convert the base64 string to bytes
+                    byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+                    System.IO.File.WriteAllBytes($"C:\\StdsTest\\{imgGuid.ToString()}.jpg", imageBytes);
                 }
 
                 _postDbContext.Posts.Add(new Post
