@@ -12,7 +12,7 @@ class Timeline extends React.Component {
 
     }
 
-    loadFeed() {
+    loadFeed = () => {
 
     
         const options = {
@@ -40,7 +40,7 @@ class Timeline extends React.Component {
         if(this.state.feed == null) {
             return( 
                 <div className='timeline-wrapper' id='timeline-wrapper'>
-                  <Hotbar setScreen={this.props.setScreen} />
+                  <Hotbar setScreen={this.props.setScreen} reloadFeed={this.loadFeed} />
                   <div className='timeline-load' id='timeline-load'>Loading</div>
                 </div>);
         }
@@ -57,12 +57,12 @@ class Timeline extends React.Component {
                 image={element.image}
                 id={element.postId}
                 jwtToken={this.props.jwtToken}
-                setScreen={this.props.setScreen}></Post>);
+                reloadFeed={this.loadFeed}></Post>);
         });
 
         return( 
         <div className='timeline-wrapper' id='timeline-wrapper'>
-            <Hotbar setScreen={this.props.setScreen} />
+            <Hotbar setScreen={this.props.setScreen} jwtToken={this.props.jwtToken} reloadFeed={this.loadFeed}/>
             <div className='post-wrapper'>
                 {posts}
             </div>

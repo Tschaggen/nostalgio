@@ -53,15 +53,12 @@
 .comment-wrapper {
     padding-left: 2rem;
     padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .comment-user {
     font-weight: bold;
     padding-bottom: 0.5rem;
-}
-
-.post-image-wrapper {
-
 }
 
 .post-image {

@@ -51,6 +51,9 @@ class Login extends React.Component {
 
       const options = {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify( params ) 
       }
 
@@ -58,9 +61,6 @@ class Login extends React.Component {
         .then((res) => {
             return res.json();
         }).then( res => {
-            res = {
-              jwtToken : 1
-            }
             this.props.setLogin(res.jwtToken);
         });
     }
