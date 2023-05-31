@@ -55,7 +55,9 @@ class Timeline extends React.Component {
                 likes={element.likes}
                 comments={element.comments}
                 image={element.image}
-                id={element.postId}></Post>);
+                id={element.postId}
+                jwtToken={this.props.jwtToken}
+                setScreen={this.props.setScreen}></Post>);
         });
 
         return( 

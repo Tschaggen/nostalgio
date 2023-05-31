@@ -70,3 +70,7 @@
     transform: translate(-50%,0%);
     max-width: 100%;
 }
+
+.post-likes {
+    padding-top: 0.2rem;
+}
