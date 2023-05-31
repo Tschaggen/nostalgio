@@ -69,10 +69,13 @@ class Timeline extends React.Component {
 
                     var reader = new FileReader();
                     var token = this.props.jwtToken;
+                    var loadf = this.loadFeed;
                     reader.readAsDataURL(e.target.elements.img.files[0]);
                     reader.onload = function () {
                         let img = reader.result;
                         let text = e.target.elements.text.value;
+
+                        console.log(img);
 
                         const params = {
                             description : text,
@@ -90,9 +93,8 @@ class Timeline extends React.Component {
           
                         fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Post', options);
 
-                        this.props.reloadFeed();
-                        this.props.reloadFeed();
-
+                        loadf();
+                        loadf();
                     };
 
                 }}>

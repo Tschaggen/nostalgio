@@ -58,11 +58,6 @@ class Login extends React.Component {
       }
 
       fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Auth/Register', options)
-        .then((res) => {
-            return res.json();
-        }).then( res => {
-            this.props.setLogin(res.jwtToken);
-        });
     }
 
     render() {
