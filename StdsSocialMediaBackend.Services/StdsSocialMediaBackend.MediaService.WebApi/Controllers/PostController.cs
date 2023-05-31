@@ -154,7 +154,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
         //verifiziere dass Img auch ein Bild ist
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<GetPostRes>> AddPost([FromBody] AddPostReq post)
+        public async Task<ActionResult> AddPost(AddPostReq post)
         {
             try
             {
@@ -175,11 +175,18 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
 
                 //ToDo: gerneriere GUID, speichere Bild damit + speichere in DB
 
+                var imgGuid = Guid.NewGuid();
+
+                if (post.Image != null) { 
+                    System.IO.File.WriteAllBytes($"C:\\StdsTest\\{imgGuid.ToString()}.jpg", Encoding.ASCII.GetBytes(post.Image));
+                }
+
                 _postDbContext.Posts.Add(new Post
                 {
                     UserId = Guid.Parse(userId),
                     Username = userName,
-                    Description = post.Description
+                    Description = post.Description,
+                    OriginalImage = imgGuid
                 });
 
                 await _postDbContext.SaveChangesAsync();
