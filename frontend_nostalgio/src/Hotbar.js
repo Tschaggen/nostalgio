@@ -24,6 +24,9 @@ class Hotbar extends React.Component {
 
               fetch(document.location.protocol + '//' + document.location.hostname+':5000/api/Follow',options);
 
+              this.props.reloadFeed();
+              this.props.reloadFeed();
+
             })}>
               <input type='text' name='user' className='hotbar-add-text'></input>
               <button className='submit'>Add</button>
