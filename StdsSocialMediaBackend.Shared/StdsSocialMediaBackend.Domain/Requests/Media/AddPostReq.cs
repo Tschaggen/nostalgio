@@ -3,6 +3,6 @@
     public class AddPostReq
     {
         public string Description { get; set; }
-        public string Image { get; set; }
+        public string? Image { get; set; }
     }
 }

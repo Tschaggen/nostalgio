@@ -126,19 +126,70 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             return Ok(res);
         }
 
+        //[HttpGet("{id}")]
+        //[Authorize]
+        //public ActionResult<GetPostRes> GetPost([FromBody] Guid postId)
+        //{
+        //    //prüfe, dass User auch follower über jwt
+        //    return Ok();
+        //}
+
         [HttpGet("[action]")]
-        [Authorize]
-        public ActionResult<GetPostRes> GetPost([FromBody] Guid postId)
+        //[Authorize]
+        //interne Anfrage
+        public async Task<ActionResult<List<Post>>> GetPostsByUser([FromBody] Guid userId)
         {
+            var posts = await _postDbContext.Posts
+                .Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if(posts == null)
+            {
+                return NotFound();
+            }
             //prüfe, dass User auch follower über jwt
-            return Ok();
+            return Ok(posts);
         }
-        [HttpPost("[action]")]
+
+        [HttpPost]
         [Authorize]
-        public ActionResult<GetPostRes> AddPost([FromBody] AddPostReq post)
+        public async Task<ActionResult<GetPostRes>> AddPost([FromBody] AddPostReq post)
         {
+            try
+            {
+                string? authHeader = Request.Headers["Authorization"];
+
+                if (authHeader == null)
+                {
+                    return BadRequest("Error inside Auth-Header");
+                }
+
+                string? userId = UserFromAuthHeader.GetUserId(authHeader);
+                string? userName = UserFromAuthHeader.GetUserName(authHeader);
+
+                if (userId == null || userName == null)
+                {
+                    return BadRequest("Error inside Auth-Header or user not found");
+                }
+
+                //ToDo: gerneriere GUID, speichere Bild damit + speichere in DB
+
+                _postDbContext.Posts.Add(new Post
+                {
+                    UserId = Guid.Parse(userId),
+                    Username = userName,
+                    Description = post.Description
+                });
+
+                await _postDbContext.SaveChangesAsync();
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             //user-id aus jwt beziehen nicht aus body
-            throw new NotImplementedException();
         }
 
         [HttpPost("[action]")]

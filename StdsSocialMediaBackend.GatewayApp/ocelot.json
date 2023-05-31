@@ -47,6 +47,24 @@
         "AllowedScopes": []
       }
     },
+    //GetProfile
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Post/GetProfile",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Post/GetProfile",
+      "UpstreamHttpMethod": [ "Options", "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
     //Comment
     {
       "DownstreamHostAndPorts": [
@@ -101,6 +119,24 @@
         "AllowedScopes": []
       }
     },
+    //New Post
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Post",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/Post",
+      "UpstreamHttpMethod": [ "Options", "Post" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
 
     //Internal Endpoints
     //GetFollowingIds
@@ -131,7 +167,7 @@
       "UpstreamHttpMethod": [ "Get" ],
       "RouteIsCaseSensitive": false
     },
-    //Add Users in UserService 
+    //Add Users in UserService
     {
       "DownstreamHostAndPorts": [
         {
@@ -143,6 +179,20 @@
       "DownstreamScheme": "http",
       "UpstreamPathTemplate": "/api/User",
       "UpstreamHttpMethod": [ "Post" ],
+      "RouteIsCaseSensitive": false
+    },
+    //GetPosts by User
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User/GetPostsByUser",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/User/GetPostsByUser",
+      "UpstreamHttpMethod": [ "Get" ],
       "RouteIsCaseSensitive": false
     },
 
