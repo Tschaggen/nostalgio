@@ -77,5 +77,6 @@ static void AddPostData(WebApplication app)
     //});
 
     db.Posts.Add(p1);
+    db.Posts.Add(p2);
     db.SaveChanges();
 }
