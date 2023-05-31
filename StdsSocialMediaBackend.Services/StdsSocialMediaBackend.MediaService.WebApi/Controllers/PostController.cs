@@ -178,7 +178,7 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
                 var imgGuid = Guid.NewGuid();
 
                 if (post.Image != null) { 
-                    System.IO.File.WriteAllBytes($"C:\\StdsTest\\{imgGuid.ToString()}.jpg", Encoding.ASCII.GetBytes(post.Image));
+                    System.IO.File.WriteAllBytes($"C:\\StdsTest\\{imgGuid.ToString()}.jpg", Convert.FromBase64String(post.Image));
                 }
 
                 _postDbContext.Posts.Add(new Post
