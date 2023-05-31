@@ -9,6 +9,7 @@ using StdsSocialMediaBackend.Domain.Requests.User;
 using StdsSocialMediaBackend.Infrastructure.Persistence;
 using System.Net.Mime;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
 {
@@ -40,7 +41,7 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
             return Ok(user.Id);
         }
 
-        [HttpGet()]
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<List<User>>> GetAll()
         {
@@ -126,5 +127,26 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
 
             return Ok();
         }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<ActionResult<List<KeyValuePair<Guid, string>>>> GetUsersForFollow()
+        {
+            var users = await _userDbContext.Users.ToListAsync();
+            if(users == null)
+            {
+                return NotFound("No Users in DB");
+            }
+            var res = new List<KeyValuePair<Guid, string>>();
+
+            foreach ( var user in users )
+            {
+                res.Add(new KeyValuePair<Guid, string>(user.Id, user.UserName));
+            }
+
+            return Ok(res);
+        }
+
+        //ToDo Delete + Update Profile : nur wenn User.Id == jwt.UserId
     }
 }

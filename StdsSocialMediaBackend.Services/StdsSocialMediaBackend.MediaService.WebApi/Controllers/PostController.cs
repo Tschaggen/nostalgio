@@ -305,5 +305,9 @@ namespace StdsSocialMediaBackend.MediaController.WebApi.Controllers
             }
             return Ok();
         }
+
+        //ToDo Delete + Update Post : nur wenn Post.UserId == jwt.UserId
+        // delete Like
+        //delete Comment
     }
 }

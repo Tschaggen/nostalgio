@@ -137,6 +137,24 @@
         "AllowedScopes": []
       }
     },
+    //GetUsersForFollow
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "DownstreamPathTemplate": "/api/User/GetUsersForFollow",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/api/User/GetUsersForFollow",
+      "UpstreamHttpMethod": [ "Options", "Get" ],
+      "RouteIsCaseSensitive": false,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
 
     //Internal Endpoints
     //GetFollowingIds

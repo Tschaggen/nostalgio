@@ -68,6 +68,11 @@ namespace StdsSocialMediaBackend.UserService.WebApi.Controllers
                 return BadRequest("Error inside Auth-Header or user not found");
             }
 
+            if (await _userDbContext.Follows.Where(x => x.FollowerId == Guid.Parse(userId) && x.FollowingId == followingUser.Id).AnyAsync())
+            {
+                return BadRequest("Already following");
+            }
+
             _userDbContext.Follows.Add(new Follow
             {
                 FollowerId = Guid.Parse(userId),
